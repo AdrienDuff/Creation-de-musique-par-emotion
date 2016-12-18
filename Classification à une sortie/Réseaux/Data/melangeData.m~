@@ -1,0 +1,10 @@
+load Numberdata.mat
+
+m = size(X,1);
+
+indice = randperm(m)
+
+X = X(indice,:);
+y = y(indice,:);
+
+save Numberdata.mat X y

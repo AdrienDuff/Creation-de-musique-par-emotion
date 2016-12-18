@@ -1,9 +1,0 @@
-Les fichier .mat doivent avoir deux matrices.
-Soit m le nombre d'exemple
-
-- Une matrice X avec m lignes et autant de colonnes que de features
-- Une matrice y de m lignes qui contient le numéro de la classe à laquelle appartient l'exemple.
-
-commandes :
-save test.mat X y
-load test.mat

@@ -1,0 +1,16 @@
+Données bruts :
+Dans ce dossier, on met en forme les données.
+Une fois qu'elles sont pretes : Il faut les mettre dans le dossier data du dossier Réseaux.
+
+Il faut télécharger le SegLabelSoft et le mettre dans ce dossier.
+
+Lancer : rename_files.py
+Rq : Le programme marche sur linux. Il faut peut être modifier les "replace" pour un autre systeme, en fonction de comment se sont nommés les fichiers dans SegLabelSoft. Le but : avoir les mêmes noms de fichiers dans SegLabelSoft que dans samples_fourrier.csv.
+
+Lancer : transforme_csv_mat.py
+Le programme va chercher toutes les émotions des samples, et les mets dans y de tel sorte qu'une ligne de X corresponde à la bonne ligne de y.
+
+Lancer : create_X_y.m
+Le programme reprend les matrices crées précedemment, permute aléatoirement les lignes de X et y (avec les mêmes permutations) et enregistre les deux matrices dans un seul fichier samples_fourrier.mat. Ce fichier est à placer dans le dossier data qui est dans le dossier Réseaux.
+
+

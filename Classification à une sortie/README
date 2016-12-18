@@ -1,0 +1,9 @@
+Classification à une sortie.
+
+
+Il faut un fichier .mat contenant les données X et y dans le dossier data du dossier Réseaux
+
+Etape 1 :
+createNeuralNetwork.m
+
+Etape 2 : trainNeuralNetwork.m
