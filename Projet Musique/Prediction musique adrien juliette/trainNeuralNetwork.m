@@ -100,9 +100,9 @@ end
 nb_ex = size(X_entrainement,1);
 nb_reussi = 0;
 % On fait la prédiction
-p = predictTheClass(all_theta,X_entrainement);
+p = predictAllClass(all_theta,X_entrainement);
 for i = 1:nb_ex
-	if y_entrainement(i,p(i)) == 1
+	if ((abs((y_entrainement(i,1) - p(i,1))/1000)<0.1)&&(abs((y_entrainement(i,4) - p(i,4))/1000)<0.1))
 		nb_reussi = nb_reussi + 1;
 	end
 end
@@ -116,9 +116,9 @@ if repartition_exemple(2) ~= 0
 	nb_ex = size(X_verif1,1);
 	nb_reussi = 0;
 	% On fait la prédiction
-	p = predictTheClass(all_theta,X_verif1);
+	p = predictAllClass(all_theta,X_verif1);
 	for i = 1:nb_ex
-		if y_verif1(i,p(i)) == 1
+		if ((abs((y_entrainement(i,1) - p(i,1))/1000)<0.1)&&(abs((y_entrainement(i,4) - p(i,4))/1000)<0.1))
 			nb_reussi = nb_reussi + 1;
 		end
 	end
