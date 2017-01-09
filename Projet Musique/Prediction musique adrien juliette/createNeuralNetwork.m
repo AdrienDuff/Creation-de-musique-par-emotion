@@ -1,5 +1,5 @@
 % 
-%  Ce programme permet la création d'un réseau de neuronne.
+%  Ce programme permet la création d'un FRésea de neuronne.
 %  On choisit le nombre de couche et le nombre de noeud par couche ainsi que d'autres paramètres.
 
 %% Initialisation
@@ -31,8 +31,8 @@ disp(taille_Couches)
 
 %L'utilisateur choisit un nom pour son réseau de neurones. On pourra ainsi enregistrer plusieurs réseaux.
 %Les poids des réseaux sont enregistrés dans le dossier Réseaux.
-if exist('Réseaux') == 0; % Si le dossier 'Réseaux n'existe pas
-  mkdir Réseaux;
+if exist('Reseaux') == 0; % Si le dossier 'Réseaux n'existe pas
+  mkdir Reseaux;
 end
 cd Reseaux;
 existe = 2;
