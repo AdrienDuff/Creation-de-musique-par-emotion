@@ -82,9 +82,11 @@ if ~exist('nb_iteration', 'var') || isempty(nb_iteration)
 end
 
 options = optimset('MaxIter', nb_iteration);
-
-[all_theta_unroll, cost] = fmincg(costFunction, inital_theta_unroll, options);
-nb_iteration_entrainement = nb_iteration_entrainement + nb_iteration;
+%On compte le temps qui passe
+t1 = clock;
+[all_theta_unroll, cost, nb_iter] = fmincg(costFunction, inital_theta_unroll, taille_Couches, nom_reseau, lambda, data_file, repartition_exemple, tps_entrainement, nb_iteration_entrainement, t1, options);
+nb_iteration_entrainement = nb_iteration_entrainement + nb_iter;
+tps_entrainement = tps_entrainement + etime(clock,t1);
 
 % On reforme all_theta
 all_theta = {};
@@ -101,8 +103,8 @@ nb_ex = size(X_entrainement,1);
 nb_reussi = 0;
 % On fait la prédiction
 p = predictAllClass(all_theta,X_entrainement);
-p(1:10,:)
-y_entrainement(1:10,:)
+%p(1:10,:)
+%y_entrainement(1:10,:)
 for i = 1:nb_ex
 	if ((abs(y_entrainement(i,1) - p(i,1))<0.05)&&(abs(y_entrainement(i,4) - p(i,4))<0.05))
 		nb_reussi = nb_reussi + 1;
@@ -136,7 +138,7 @@ if repartition_exemple(3) ~= 0
 	% On fait la prédiction
 	p = predictTheClass(all_theta,X_verif2);
 	for i = 1:nb_ex
-		if y_verif2(i,p(i)) == 1
+		if ((abs(y_entrainement(i,1) - p(i,1))<0.05)&&(abs(y_entrainement(i,4) - p(i,4))<0.05))
 			nb_reussi = nb_reussi + 1;
 		end
 	end

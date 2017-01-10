@@ -1,4 +1,4 @@
-function [X, fX, i] = fmincg(f, X, options, P1, P2, P3, P4, P5)
+function [X, fX, i] = fmincg(f, X, taille_Couches, nom_reseau, lambda , data_file , repartition_exemple, tps_entrainement_debut, nb_iteration_entrainement_debut, t1, options, P1, P2, P3, P4, P5)
 % Minimize a continuous differentialble multivariate function. Starting point
 % is given by "X" (D by 1), and the function named in the string "f", must
 % return a function value and a vector of partial derivatives. The Polack-
@@ -62,8 +62,8 @@ EXT = 3.0;                    % extrapolate maximum 3 times the current bracket
 MAX = 20;                         % max 20 function evaluations per line search
 RATIO = 100;                                      % maximum allowed slope ratio
 
-argstr = ['feval(f, X'];                      % compose string used to call function
-for i = 1:(nargin - 3)
+argstr = ['feval(f, X'];                   % compose string used to call function
+for i = 1:(nargin - 11)
   argstr = [argstr, ',P', int2str(i)];
 end
 argstr = [argstr, ')'];
@@ -170,6 +170,25 @@ while i < abs(length)                                      % while not finished
   end
   if exist('OCTAVE_VERSION')
     fflush(stdout);
+  end
+
+  %We save erery 100 iterations
+  if mod(i,50) == 0
+    % On reforme all_theta
+    all_theta = {};
+    L = size(taille_Couches,2);
+    debut_vecteur = 1;
+    all_theta_unroll = X;
+    for j=1:(L-1)
+      all_theta(j) = reshape(all_theta_unroll(debut_vecteur:(debut_vecteur - 1 + taille_Couches(j+1)*(taille_Couches(j) + 1))), ...
+                  taille_Couches(j+1),(taille_Couches(j) + 1));
+      debut_vecteur = debut_vecteur + (taille_Couches(j+1)*(taille_Couches(j) + 1));
+    end
+    nb_iteration_entrainement = nb_iteration_entrainement_debut + i;
+    tps_entrainement = tps_entrainement_debut + etime(clock,t1);
+    cd Reseaux
+    save(nom_reseau,'taille_Couches','lambda','data_file','repartition_exemple','tps_entrainement','nb_iteration_entrainement','all_theta');
+    cd ..
   end
 end
 fprintf('\n');
