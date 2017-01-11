@@ -44,13 +44,13 @@ for k= 1:m
 	% a(1) est en fait les entrées de la première couche. z(1) ne représente rien.
 	z{1} = 0;
 	a{1} = X(k,:)';
-	for l=2:L
+	for l=2:L-1
 		z{l} = all_theta{l-1}*[1 ; a{l-1}];
 		a{l} = sigmoid(z{l});
 	end
-	%Pas de sigmoid pour la dernière couche
-	%z{L} = all_theta{L-1}*[1 ; a{L-1}];
-	%a{L} = z{L};
+	%Sigmoid différente pour la dernière couche
+	z{L} = all_theta{L-1}*[1 ; a{L-1}];
+	a{L} = sigmoid01(z{L});
 	% a(L) contient h(x). La sortie sur la dernière couche.
 	% Le sum correxpond à la somme sur K, la taille de la dernière couche.
 	%J = J - sum(y(k,:)'.*log(a{L}) + (1-y(k,:)').*log(1-a{L}));
@@ -63,7 +63,7 @@ for k= 1:m
 
 	% delta contient les erreurs de chaque neurones sur chaque couche.
 	delta = {};
-	delta{L} = (a{L} - y(k,:)').*sigmoidGradient(z{L});
+	delta{L} = (a{L} - y(k,:)').*sigmoidGradient01(z{L});
 	%delta{L} = a{L} - y(k,:)';
 	all_theta_grad{L-1} = all_theta_grad{L-1} + delta{L}*[1 ; a{L-1}]';
 
