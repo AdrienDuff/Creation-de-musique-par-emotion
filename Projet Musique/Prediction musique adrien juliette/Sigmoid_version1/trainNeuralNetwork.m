@@ -106,7 +106,7 @@ p = predictAllClass(all_theta,X_entrainement);
 %p(1:10,:)
 %y_entrainement(1:10,:)
 for i = 1:nb_ex
-	if ((abs(y_entrainement(i,1) - p(i,1))<0.05)&&(abs(y_entrainement(i,4) - p(i,4))<0.05))
+	if ((abs(y_entrainement(i,1) - p(i,1))<0.01)&&(abs(y_entrainement(i,4) - p(i,4))<0.05))
 		nb_reussi = nb_reussi + 1;
 	end
 end
