@@ -13,10 +13,10 @@ nb_mat_theta = size(all_theta,2);
 
 % Sortie de la couche 1.
 h = X;
-for l = 1:nb_mat_theta 
+for l = 1:nb_mat_theta-1 
 	h = sigmoid([ones(m, 1) h] * (all_theta{l})');
 end
-
+h = sigmoid01([ones(m,1) h] * (all_theta{nb_mat_theta})');
 p = h;
 
 % =========================================================================
