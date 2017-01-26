@@ -138,7 +138,7 @@ if repartition_exemple(3) ~= 0
 	% On fait la prédiction
 	p = predictTheClass(all_theta,X_verif2);
 	for i = 1:nb_ex
-		if ((abs(y_entrainement(i,1) - p(i,1))<0.05)&&(abs(y_entrainement(i,4) - p(i,4))<0.05))
+		if ((abs(y_entrainement(i,1) - p(i,1))<0.01)&&(abs(y_entrainement(i,4) - p(i,4))<0.01))
 			nb_reussi = nb_reussi + 1;
 		end
 	end
@@ -154,7 +154,7 @@ end
 cd Reseaux
 
 fprintf('\nEnregistrement des paramètres dans le fichier %s',nom_reseau)
-save(nom_reseau,'taille_Couches','lambda','data_file','repartition_exemple','tps_entrainement','nb_iteration_entrainement','all_theta');
+save(nom_reseau,'-mat7-binary','taille_Couches','lambda','data_file','repartition_exemple','tps_entrainement','nb_iteration_entrainement','all_theta');
 fprintf('\nFait.\n')
 cd ..
 end
