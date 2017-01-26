@@ -19,6 +19,8 @@ nb_sec = input('Entrer le nombre de secondes pour la séquence en sortie : ')
 
 emo = os.system("matlab predictAllClass")
 
-"""for k in range(nb_sec/3) :
-	emo = eng.predictAllClass(all_theta_1,data_music)"""
+for k in range(nb_sec/3) :
+	emo = eng.predictAllClass(all_theta_1,data_music)
+
+	
 
